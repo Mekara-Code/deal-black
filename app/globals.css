@@ -1,0 +1,135 @@
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+@import "swiper/css/effect-creative";
+@import "tailwindcss";
+@source "../components";
+
+/* Allow card shadows and adjacent slides to extend beyond Swiper's frame. */
+.swiper {
+  overflow: visible;
+}
+
+.sector-square-slideshow.swiper {
+  overflow: hidden;
+}
+
+.sector-diamond-matrix {
+  position: relative;
+  display: none;
+  width: 100%;
+  height: clamp(948px, 74vw, 1080px);
+  overflow: hidden;
+}
+
+.sector-diamond-matrix-aura {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.sector-diamond-matrix-track {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: stretch;
+  gap: clamp(14px, 1.25vw, 18px);
+  transform: translate(-50%, -50%) rotate(45deg);
+  transform-origin: center;
+}
+
+.sector-diamond-matrix-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(14px, 1.25vw, 18px);
+}
+
+.sector-diamond-card-shell {
+  transform: rotate(-45deg);
+}
+
+.sector-diamond-card-reveal,
+.sector-square-slide-reveal {
+  will-change: transform, opacity;
+}
+
+.sector-diamond-card {
+    border-radius: 30%;
+    width: clamp(200px, 26vw, 340px);
+    height: clamp(200px, 26vw, 340px);
+    transform: rotate(45deg);
+}
+
+.sector-diamond-card-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  overflow: hidden;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+@media (min-width: 1280px) {
+  .sector-diamond-matrix {
+    display: block;
+  }
+
+  .sector-square-slideshow-fallback {
+    display: none;
+  }
+}
+
+@font-face {
+  font-family: "IranSansWeb";
+  src: url("/assets/font/IRAN%20SANS%20BOLD.TTF") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IranSansWeb";
+  src: url("/assets/font/IRAN%20SANS%20BOLD.TTF") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --font-persian: "IranSansWeb", Arial, Helvetica, sans-serif;
+}
+
+@theme inline {
+  --color-background: #02090e;
+  --color-foreground: #f4f4f0;
+  --color-surface: #030b10;
+  --color-surface-strong: #050d12;
+  --color-muted: #999da0;
+  --color-brand: #d8a75c;
+  --color-brand-bright: #edc77f;
+  --color-theme-border: rgb(216 167 92 / 0.32);
+  --font-persian: "IranSansWeb", Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+  font-family: var(--font-persian);
+}
+
+:where([lang="fa"], [lang="ar"], [dir="rtl"], [dir="auto"]) {
+  font-family: var(--font-persian);
+}
+
+:where(input, textarea, button, select) {
+  font-family: inherit;
+}
+
+/* Sector slide controls use physical placement; invert their glyphs in RTL. */
+:where([dir="rtl"]) [data-swiper-directional-arrow] {
+  transform: rotate(180deg);
+}

@@ -1,0 +1,31 @@
+{
+  "name": "deal-cinematic-hero",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "db:migrate": "node database/migrate.mjs",
+    "db:import-legacy": "node database/import-legacy.mjs"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "lucide-react": "1.24.0",
+    "next": "16.2.10",
+    "pg": "^8.22.0",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "swiper": "^14.0.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.2",
+    "@types/node": "22.18.8",
+    "@types/pg": "^8.20.0",
+    "@types/react": "19.2.8",
+    "@types/react-dom": "19.2.3",
+    "postcss": "^8.5.19",
+    "tailwindcss": "^4.3.2",
+    "typescript": "5.9.3"
+  }
+}

@@ -8,6 +8,7 @@
     "start": "next start",
     "db:migrate": "node database/migrate.mjs",
     "db:import-legacy": "node database/import-legacy.mjs",
+    "db:copy-to-remote": "node database/copy-postgres-data.mjs",
     "prisma:generate": "prisma generate",
     "prisma:validate": "prisma validate",
     "prisma:studio": "prisma studio"

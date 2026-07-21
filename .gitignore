@@ -9,6 +9,7 @@ data/*.json
 dev-server.log
 tmp/
 *.tsbuildinfo
+generated/prisma/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

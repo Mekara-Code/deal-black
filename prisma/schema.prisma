@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Sector {
+  id              String   @id
+  language        String
+  title           String
+  englishName     String   @map("english_name")
+  slug            String
+  excerpt         String
+  content         String
+  blocks          Json
+  featuredImage   String   @map("featured_image")
+  cta             String
+  icon            String
+  displayOrder    Int      @map("display_order")
+  categories      Json
+  tags            Json
+  status          String
+  metaDescription String   @map("meta_description")
+  createdAt       DateTime @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([language, slug], map: "sectors_language_slug_key")
+  @@index([displayOrder, updatedAt], map: "sectors_display_order_idx")
+  @@map("sectors")
+}
+
+model TeamMember {
+  id           String   @id
+  nameEn       String   @map("name_en")
+  nameFa       String   @map("name_fa")
+  nameAr       String   @map("name_ar")
+  roleEn       String   @map("role_en")
+  roleFa       String   @map("role_fa")
+  roleAr       String   @map("role_ar")
+  imageUrl     String   @map("image_url")
+  displayOrder Int      @map("display_order")
+  status       String
+  createdAt    DateTime @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @map("updated_at") @db.Timestamptz(6)
+
+  @@index([status, displayOrder, updatedAt], map: "team_members_public_idx")
+  @@map("team_members")
+}
+
+model PartnerLogo {
+  id           String   @id
+  name         String
+  websiteUrl   String   @map("website_url")
+  imageUrl     String   @map("image_url")
+  displayOrder Int      @map("display_order")
+  status       String
+  createdAt    DateTime @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @map("updated_at") @db.Timestamptz(6)
+
+  @@index([status, displayOrder, updatedAt], map: "partner_logos_public_idx")
+  @@map("partner_logos")
+}
+
+model PartnerStory {
+  id           String   @id
+  translations Json
+  imageUrl     String   @map("image_url")
+  displayOrder Int      @map("display_order")
+  status       String
+  createdAt    DateTime @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @map("updated_at") @db.Timestamptz(6)
+
+  @@index([status, displayOrder, updatedAt], map: "partner_stories_public_idx")
+  @@map("partner_stories")
+}
+
+model CollaborationRequest {
+  id        String   @id @db.Uuid
+  name      String
+  email     String
+  phone     String
+  message   String
+  status    String
+  createdAt DateTime @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @map("updated_at") @db.Timestamptz(6)
+
+  @@index([createdAt], map: "collaboration_requests_inbox_idx")
+  @@map("collaboration_requests")
+}
+
+model ContactSettings {
+  singleton       Boolean  @id @default(true)
+  email           String
+  phonePrimary    String   @map("phone_primary")
+  phoneSecondary  String   @map("phone_secondary")
+  whatsapp        String
+  telegram        String
+  instagram       String
+  linkedin        String
+  addressFa       String   @map("address_fa")
+  addressEn       String   @map("address_en")
+  addressAr       String   @map("address_ar")
+  updatedAt       DateTime @map("updated_at") @db.Timestamptz(6)
+
+  @@map("contact_settings")
+}
+
+model NewsArticle {
+  id             String   @id
+  slug           String   @unique
+  imageUrl       String   @map("image_url")
+  publishedAt    DateTime @map("published_at") @db.Timestamptz(6)
+  readingMinutes Int      @map("reading_minutes")
+  translations   Json
+
+  @@index([publishedAt], map: "news_articles_published_idx")
+  @@map("news_articles")
+}
